@@ -2,6 +2,8 @@ package pe.com.cibertec.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -29,6 +31,7 @@ public class UsuarioEntity {
 	private String apellidos;
 	
 	@Column(name = "fNacimiento", nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fNacimiento;
 	
 	@Column(name = "url", nullable = false)

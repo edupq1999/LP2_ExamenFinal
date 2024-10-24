@@ -23,10 +23,13 @@ public class ProductoEntity {
 	private Integer idProducto;
 	
 	@Column(name = "nombre", nullable = false)
-	private Integer nombre;
+	private String nombre;
 	
 	@Column(name = "stock", nullable = false)
 	private Integer stock;
+	
+	@Column(name = "precio", nullable = false)
+	private Double precio;
 	
 	@Column(name = "fk_categoria", nullable = false)
     private Integer idCategoria;
@@ -39,7 +42,7 @@ public class ProductoEntity {
 		return idProducto;
 	}
 
-	public Integer getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
 
@@ -59,7 +62,7 @@ public class ProductoEntity {
 		this.idProducto = idProducto;
 	}
 
-	public void setNombre(Integer nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
@@ -73,6 +76,14 @@ public class ProductoEntity {
 
 	public void setCategoriaEntity(CategoriaEntity categoriaEntity) {
 		this.categoriaEntity = categoriaEntity;
+	}
+
+	public Double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Double precio) {
+		this.precio = precio;
 	}
 	
 	
