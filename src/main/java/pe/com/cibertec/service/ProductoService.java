@@ -8,7 +8,7 @@ public interface ProductoService {
 	
 	List<ProductoEntity> listarProductos();
 	ProductoEntity buscarPorId(Integer idProducto);
-	void crearProducto(ProductoEntity newProducto);
-	void actualizarProducto(ProductoEntity updatedProducto);
-	void eliminarProducto(Integer idProducto);
+	boolean crearProducto(ProductoEntity newProducto);
+	boolean actualizarProducto(ProductoEntity updatedProducto);
+	boolean eliminarProducto(Integer idProducto);
 }
