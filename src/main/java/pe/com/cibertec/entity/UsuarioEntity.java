@@ -6,9 +6,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tb_usuario")
+@NoArgsConstructor
+@AllArgsConstructor
 public class UsuarioEntity {
 	
 	@Id
@@ -29,4 +33,54 @@ public class UsuarioEntity {
 	
 	@Column(name = "url", nullable = false)
 	private String url;
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public String getNombres() {
+		return nombres;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public Date getfNacimiento() {
+		return fNacimiento;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public void setfNacimiento(Date fNacimiento) {
+		this.fNacimiento = fNacimiento;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	
 }
