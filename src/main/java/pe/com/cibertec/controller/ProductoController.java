@@ -40,7 +40,7 @@ public class ProductoController {
     }
 	
 	@PostMapping("/crearProducto")
-	public String registrarProducto(@RequestParam(value = "categoryId") Integer categoryId,
+	public String registrarProducto(@RequestParam Integer categoryId,
 			@ModelAttribute("newProducto") ProductoEntity nuevoProducto) {
 		if (categoryId != null) {
 			CategoriaEntity categoria = categoriaService.buscarCategoriaPorId(categoryId);
@@ -52,17 +52,17 @@ public class ProductoController {
 		return "listaProductos";
 	}
     
-    @GetMapping("/actualizar/{prodId}")
-	public String mostrarFormularioActualizar(@PathVariable Integer prodId, Model model) {
+    @GetMapping("/actualizarProducto/{prodId}")
+	public String buscarProducto(@PathVariable Integer prodId, Model model) {
 		ProductoEntity producto = productoService.buscarPorId(prodId);
 		List<CategoriaEntity> categorias = categoriaService.listarCategoria();
 		model.addAttribute("producto", producto);
 		model.addAttribute("lstCategorias", categorias);
-		return "actualizarEmpleado";
+		return "actualizarProducto";
 	}
 
-	@PostMapping("/actualizar/{prodId}")
-	public String actualizarEmpleado(@PathVariable Integer prodId, @RequestParam Integer catId,
+	@PostMapping("/actualizarProducto/{prodId}")
+	public String actualizarProducto(@PathVariable Integer prodId, @RequestParam Integer catId,
 			@ModelAttribute("producto") ProductoEntity producto) {
 		producto.setIdCategoria(catId);
 		productoService.actualizarProducto(producto);
@@ -70,7 +70,7 @@ public class ProductoController {
 	}
 
 	@GetMapping("/eliminar/{prodId}")
-	public String eliminarEmpleado(@PathVariable("prodId") Integer prodId) {
+	public String eliminarProducto(@PathVariable Integer prodId) {
 		productoService.eliminarProducto(prodId);
 		return "listaProductos";
 	}
