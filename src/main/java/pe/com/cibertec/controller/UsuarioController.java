@@ -23,12 +23,17 @@ public class UsuarioController {
     	model.addAttribute("usuario", new UsuarioEntity());
         return "registrar_usuario";
     }
-    
-    @PostMapping("/registrar_usuario")
+	
+	@PostMapping("/registrar_usuario")
 	public String registrarCuenta(@ModelAttribute("usuario") UsuarioEntity newUsuario,
 			Model model, @RequestParam("foto") MultipartFile foto) {
     	usuarioService.registrarUsuario(newUsuario, foto);
-		return "login";
+		return "redirect:/login";
+	}
+	
+	@GetMapping("/login")
+	public String mostrarLogin(Model model) {
+	    return "login";
 	}
     
     @PostMapping("/login")
@@ -38,6 +43,6 @@ public class UsuarioController {
             model.addAttribute("error", resultadoLogin);
             return "login";
         }
-        return "listaProductos";
+        return "redirect:/listaProductos";
     }
 }

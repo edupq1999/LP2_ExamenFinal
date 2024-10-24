@@ -13,46 +13,46 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import pe.com.cibertec.entity.CategoriaEntity;
 import pe.com.cibertec.entity.ProductoEntity;
-import pe.com.cibertec.entity.UsuarioEntity;
 import pe.com.cibertec.service.CategoriaService;
 import pe.com.cibertec.service.ProductoService;
 
 @Controller
 public class ProductoController {
-	
+
 	@Autowired
 	private ProductoService productoService;
-	
+
 	@Autowired
 	private CategoriaService categoriaService;
-	
+
 	@GetMapping("/listaProductos")
-    public String listarProductos(Model model) {
-    	model.addAttribute("lstProductos", productoService.listarProductos());
-        return "listaProductos";
-    }
-    
+	public String listarProductos(Model model) {
+		model.addAttribute("lstProductos", productoService.listarProductos());
+		return "listaProductos";
+	}
+
 	@GetMapping("/crearProducto")
-    public String crearProducto(Model model) {
-    	model.addAttribute("newProducto", new UsuarioEntity());
+	public String crearProducto(Model model) {
+		model.addAttribute("newProducto", new ProductoEntity());
 		model.addAttribute("lstCategoria", categoriaService.listarCategoria());
-        return "crearProducto";
-    }
-	
+		return "crearProducto";
+	}
+
 	@PostMapping("/crearProducto")
 	public String registrarProducto(@RequestParam Integer categoryId,
 			@ModelAttribute("newProducto") ProductoEntity nuevoProducto) {
 		if (categoryId != null) {
 			CategoriaEntity categoria = categoriaService.buscarCategoriaPorId(categoryId);
 			nuevoProducto.setCategoriaEntity(categoria);
+			nuevoProducto.setIdCategoria(categoryId);
 			productoService.crearProducto(nuevoProducto);
 		} else {
-			System.out.println("No se seleccionó un área.");
+			System.out.println("No se seleccionó una categoría.");
 		}
-		return "listaProductos";
+		return "redirect:/listaProductos";
 	}
-    
-    @GetMapping("/actualizarProducto/{prodId}")
+
+	@GetMapping("/actualizarProducto/{prodId}")
 	public String buscarProducto(@PathVariable Integer prodId, Model model) {
 		ProductoEntity producto = productoService.buscarPorId(prodId);
 		List<CategoriaEntity> categorias = categoriaService.listarCategoria();
@@ -62,11 +62,19 @@ public class ProductoController {
 	}
 
 	@PostMapping("/actualizarProducto/{prodId}")
-	public String actualizarProducto(@PathVariable Integer prodId, @RequestParam Integer catId,
+	public String actualizarProducto(@PathVariable Integer prodId, @RequestParam Integer idCategoria,
 			@ModelAttribute("producto") ProductoEntity producto) {
-		producto.setIdCategoria(catId);
-		productoService.actualizarProducto(producto);
-		return "listaProductos";
+		if (idCategoria != null) {
+			CategoriaEntity categoria = categoriaService.buscarCategoriaPorId(idCategoria);
+			producto.setIdProducto(prodId);
+			producto.setCategoriaEntity(categoria);
+			producto.setIdCategoria(idCategoria);
+			productoService.actualizarProducto(producto);
+		} else {
+			System.out.println("No se seleccionó una categoría.");
+		}
+		
+		return "redirect:/listaProductos";
 	}
 
 	@GetMapping("/eliminar/{prodId}")
