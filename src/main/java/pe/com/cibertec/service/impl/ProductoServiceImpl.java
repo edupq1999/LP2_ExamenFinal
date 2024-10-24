@@ -40,6 +40,7 @@ public class ProductoServiceImpl implements CategoriaService, ProductoService{
 			productoRepository.save(newProducto);
 			return true;
 		} catch (Exception e) {
+			System.out.println(e.toString());
 			return false;
 		}
 		
