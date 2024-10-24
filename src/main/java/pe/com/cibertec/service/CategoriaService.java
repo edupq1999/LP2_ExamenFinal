@@ -7,4 +7,5 @@ import pe.com.cibertec.entity.CategoriaEntity;
 public interface CategoriaService {
 	
 	List<CategoriaEntity> listarCategoria();
+	CategoriaEntity buscarCategoriaPorId(Integer categoriaId);
 }

@@ -1,6 +1,7 @@
 package pe.com.cibertec.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
 
 import pe.com.cibertec.entity.UsuarioEntity;
 import pe.com.cibertec.repository.UsuarioRepository;
@@ -26,8 +27,10 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 
 	@Override
-	public boolean registrarUsuario(UsuarioEntity newUser) {
+	public boolean registrarUsuario(UsuarioEntity newUser, MultipartFile foto) {
 		// TODO Auto-generated method stub
+		String nombreFoto = Utilitarios.guardarImagen(foto);
+		newUser.setUrl(nombreFoto);
 		String passwordHash = Utilitarios.extraerHash(newUser.getPassword());
 		newUser.setPassword(passwordHash);
 		try {
