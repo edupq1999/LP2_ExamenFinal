@@ -1,44 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lista de Productos</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<div class="container mt-5">
-		<h2 class="text-center mb-4">Lista de Productos</h2>
-		<a href="/crearProducto" class="btn btn-primary mb-3">Crear
-			Producto</a>
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Nombre</th>
-					<th>Stock</th>
-					<th>Precio</th>
-					<th>Categoría</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="producto : ${lstProductos}">
-					<td th:text="${producto.idProducto}"></td>
-					<td th:text="${producto.nombre}"></td>
-					<td th:text="${producto.stock}"></td>
-					<td th:text="${producto.precio}"></td>
-					<td th:text="${producto.categoriaEntity.nombre}"></td>
-					<td><a
-						th:href="@{/actualizarProducto/{id}(id=${producto.idProducto})}"
-						class="btn btn-warning btn-sm">Editar</a> <a
-						th:href="@{/eliminar/{id}(id=${producto.idProducto})}"
-						class="btn btn-danger btn-sm">Eliminar</a></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Tienda</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <span class="nav-link">
+                            Bienvenido, <span th:text="${session.usuarioLogeado}"></span>
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Cerrar sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Lista de Productos</h2>
+
+        <div class="d-flex justify-content-between mb-3">
+            <a href="/crearProducto" class="btn btn-primary">Crear Producto</a>
+            <a href="/generar_pdf" class="btn btn-secondary" target="_blank">Generar PDF</a> <!-- Botón para generar PDF -->
+        </div>
+
+        <!-- Tabla de productos -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Stock</th>
+                    <th>Precio</th>
+                    <th>Categoría</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="producto : ${lstProductos}">
+                    <td th:text="${producto.idProducto}"></td>
+                    <td th:text="${producto.nombre}"></td>
+                    <td th:text="${producto.stock}"></td>
+                    <td th:text="${producto.precio}"></td>
+                    <td th:text="${producto.categoriaEntity.nombre}"></td>
+                    <td>
+                        <a th:href="@{/actualizarProducto/{id}(id=${producto.idProducto})}" class="btn btn-warning btn-sm">Editar</a>
+                        <a th:href="@{/eliminar/{id}(id=${producto.idProducto})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
