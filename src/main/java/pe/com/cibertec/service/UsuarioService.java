@@ -8,4 +8,5 @@ public interface UsuarioService {
 	
 	boolean registrarUsuario(UsuarioEntity newUser, MultipartFile foto);
 	String validarUsuario(String correo, String password);
+	UsuarioEntity buscarPorCorreo(String correo);
 }

@@ -18,7 +18,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Override
 	public String validarUsuario(String correo, String password) {
 		// TODO Auto-generated method stub
-		UsuarioEntity usuario = usuarioRepository.findById(correo).get();
+		UsuarioEntity usuario = usuarioRepository.findById(correo).orElse(null);
 		if (usuario == null) {
 			return "La cuenta no existe";
 		} else if (!Utilitarios.checkPassword(password, usuario.getPassword())) {
@@ -43,5 +43,13 @@ public class UsuarioServiceImpl implements UsuarioService{
 			return false;
 		}
 	}
+
+	@Override
+	public UsuarioEntity buscarPorCorreo(String correo) {
+		// TODO Auto-generated method stub
+		return usuarioRepository.findById(correo).get();
+	}
+	
+	
 
 }
