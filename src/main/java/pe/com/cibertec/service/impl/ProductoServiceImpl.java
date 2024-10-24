@@ -71,4 +71,10 @@ public class ProductoServiceImpl implements CategoriaService, ProductoService{
 		return categoriaRepository.findAll();
 	}
 
+	@Override
+	public CategoriaEntity buscarCategoriaPorId(Integer categoriaId) {
+		// TODO Auto-generated method stub
+		return categoriaRepository.findById(categoriaId).get();
+	}
+
 }
