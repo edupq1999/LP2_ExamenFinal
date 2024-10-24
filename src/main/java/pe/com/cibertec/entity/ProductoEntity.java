@@ -15,8 +15,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "tb_producto")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductoEntity {
@@ -38,4 +36,46 @@ public class ProductoEntity {
 	@ManyToOne
     @JoinColumn(name = "fk_categoria", referencedColumnName = "idCategoria", insertable = false, updatable = false)
     private CategoriaEntity categoriaEntity;
+
+	public Integer getIdProducto() {
+		return idProducto;
+	}
+
+	public Integer getNombre() {
+		return nombre;
+	}
+
+	public Integer getStock() {
+		return stock;
+	}
+
+	public Integer getIdCategoria() {
+		return idCategoria;
+	}
+
+	public CategoriaEntity getCategoriaEntity() {
+		return categoriaEntity;
+	}
+
+	public void setIdProducto(Integer idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	public void setNombre(Integer nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
+
+	public void setIdCategoria(Integer idCategoria) {
+		this.idCategoria = idCategoria;
+	}
+
+	public void setCategoriaEntity(CategoriaEntity categoriaEntity) {
+		this.categoriaEntity = categoriaEntity;
+	}
+	
+	
 }
