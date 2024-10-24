@@ -25,5 +25,5 @@ public class CategoriaEntity {
 	private Integer idCategoria;
 	
 	@Column(name = "nombre", nullable = false)
-	private Integer nombre;
+	private String nombre;
 }
